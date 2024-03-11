@@ -15,12 +15,17 @@ What does the module provide?
 ## Usage
 
 ```hcl
-module "module_name" {
-  source  = "github.com/opsd-io/module_name?ref=v0.0.1"
+module "terraform-module-digitalocean-mysql" {
+  source  = "github.com/opsd-io/terraform-module-digitalocean-mysql/?ref=v0.0.1"
 
   # Variables
-  variable_1 = "foo"
-  variable_2 = "bar"
+  name       = "example-mysql-cluster"
+  engine     = "mysql"
+  version    = "8"
+  size       = "db-s-1vcpu-1gb"
+  region     = "nyc1"
+  node_count = 1
+  tags       = ["production"]
 }
 ```
 
