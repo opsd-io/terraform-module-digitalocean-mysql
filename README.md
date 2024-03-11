@@ -19,13 +19,13 @@ module "terraform-module-digitalocean-mysql" {
   source  = "github.com/opsd-io/terraform-module-digitalocean-mysql/?ref=v0.0.1"
 
   # Variables
-  name       = "example-mysql-cluster"
+  databasename = "example-mysql-cluster"
   engine     = "mysql"
-  version    = "8"
-  size       = "db-s-1vcpu-1gb"
+  version_of_engine    = "8"
+  mysql_main_size = "db-s-1vcpu-1gb"
   region     = "nyc1"
-  node_count = 1
-  tags       = ["production"]
+  mysql_main_node_count = 1
+  common_tags = ["production"]
 }
 ```
 
