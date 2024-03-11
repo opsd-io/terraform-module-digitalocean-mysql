@@ -1,5 +1,5 @@
 module "terraform-module-digitalocean-mysql" {
-  source     = "github.com/opsd-io/terraform-module-digitalocean-mysql?ref=features/first-release"
+  source     = "github.com/opsd-io/terraform-module-digitalocean-mysql?ref=1-create-mysql-terraform-module"
   name       = "example-mysql-cluster"
   engine     = "mysql"
   version    = "8"
