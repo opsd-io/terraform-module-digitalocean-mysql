@@ -20,7 +20,7 @@ resource "digitalocean_database_cluster" "mysql_main" {
 resource "digitalocean_database_firewall" "firewall" {
   # count      = var.create_firewall == true ? 1 : 0
 
-  for_each   = toset(var.firewall_rules)
+  for_each   = var.firewall_rules
   cluster_id = digitalocean_database_cluster.mysql_main.id
   rule {
     type  = "ip_addr"

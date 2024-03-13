@@ -41,7 +41,7 @@ variable "common_tags" {
 #   description = "True mean that firewall should be created"
 # }
 variable "firewall_rules" {
-  type        = list(string)
+  type        = set(string)
   default     = []
   description = "List of trusted sources associated with the cluster"
 }
