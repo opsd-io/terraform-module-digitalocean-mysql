@@ -74,7 +74,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_database_firewall_id"></a> [database\_firewall\_id](#output\_database\_firewall\_id) | A unique identifier for the firewall |
 | <a name="output_mysql_main_default_database"></a> [mysql\_main\_default\_database](#output\_mysql\_main\_default\_database) | Name of the cluster's default database. |
 | <a name="output_mysql_main_default_user"></a> [mysql\_main\_default\_user](#output\_mysql\_main\_default\_user) | Username for the cluster's default user. |
 | <a name="output_mysql_main_default_user_password"></a> [mysql\_main\_default\_user\_password](#output\_mysql\_main\_default\_user\_password) | Password for the cluster's default user. |
