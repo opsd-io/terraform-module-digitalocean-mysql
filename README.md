@@ -62,9 +62,9 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A list of tag names to be applied to the database cluster | `set(string)` | n/a | yes |
-| <a name="input_create_firewall"></a> [create\_firewall](#input\_create\_firewall) | True mean that firewall should be created | `bool` | `false` | no |
 | <a name="input_databasename"></a> [databasename](#input\_databasename) | The name of the database cluster. Required | `string` | n/a | yes |
 | <a name="input_engine"></a> [engine](#input\_engine) | Database engine used by the cluster. Required | `string` | `"mysql"` | no |
+| <a name="input_firewall_rules"></a> [firewall\_rules](#input\_firewall\_rules) | List of trusted sources associated with the cluster | `list(string)` | `[]` | no |
 | <a name="input_mysql_main_node_count"></a> [mysql\_main\_node\_count](#input\_mysql\_main\_node\_count) | Number of mysql nodes that will be created. Required | `number` | `1` | no |
 | <a name="input_mysql_main_size"></a> [mysql\_main\_size](#input\_mysql\_main\_size) | The mysql node instance size. Required | `string` | `"db-s-1vcpu-1gb"` | no |
 | <a name="input_region"></a> [region](#input\_region) | DigitalOcean region where the cluster will reside. Required | `string` | n/a | yes |
