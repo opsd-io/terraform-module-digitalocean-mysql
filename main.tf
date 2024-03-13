@@ -24,7 +24,7 @@ resource "digitalocean_database_firewall" "firewall" {
   cluster_id = digitalocean_database_cluster.mysql_main.id
   rule {
     type  = "ip_addr"
-    value = each.value
+    value = each.key
   }
 
   depends_on = [digitalocean_database_cluster.mysql_main]
