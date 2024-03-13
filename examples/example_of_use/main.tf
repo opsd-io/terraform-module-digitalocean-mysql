@@ -8,5 +8,5 @@ module "Digitalocean_mysql" {
   mysql_main_node_count = 1
   common_tags           = ["production"]
   # create_firewall       = true
-  firewall_rules = ["192.168.0.1", "192.168.0.2"]
+  firewall_rules = ["192.168.0.1", "192.168.0.2", "192.168.0.8"]
 }
