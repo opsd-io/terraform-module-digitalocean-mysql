@@ -13,3 +13,21 @@ resource "digitalocean_database_cluster" "mysql_main" {
   node_count = var.mysql_main_node_count
   tags       = var.common_tags
 }
+
+#---------------------------------------------#
+#Description : adding database firewall rules.
+#---------------------------------------------#
+resource "digitalocean_database_firewall" "firewall" {
+  count      = var.create_firewall == true ? 1 : 0
+  cluster_id = digitalocean_database_cluster.mysql_main.id
+  rule {
+    type  = "ip_addr"
+    value = "192.168.1.1"
+  }
+
+  rule {
+    type  = "ip_addr"
+    value = "192.0.2.0"
+  }
+  depends_on = [digitalocean_database_cluster.mysql_main]
+}

@@ -35,3 +35,8 @@ variable "common_tags" {
   description = "A list of tag names to be applied to the database cluster"
   type        = set(string)
 }
+variable "create_firewall" {
+  type        = bool
+  default     = false
+  description = "True mean that firewall should be created"
+}

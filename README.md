@@ -54,6 +54,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [digitalocean_database_cluster.mysql_main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_cluster) | resource |
+| [digitalocean_database_firewall.firewall](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_firewall) | resource |
 | [digitalocean_database_mysql_config.mysql_main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_mysql_config) | resource |
 
 ## Inputs
@@ -61,6 +62,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A list of tag names to be applied to the database cluster | `set(string)` | n/a | yes |
+| <a name="input_create_firewall"></a> [create\_firewall](#input\_create\_firewall) | True mean that firewall should be created | `bool` | `false` | no |
 | <a name="input_databasename"></a> [databasename](#input\_databasename) | The name of the database cluster. Required | `string` | n/a | yes |
 | <a name="input_engine"></a> [engine](#input\_engine) | Database engine used by the cluster. Required | `string` | `"mysql"` | no |
 | <a name="input_mysql_main_node_count"></a> [mysql\_main\_node\_count](#input\_mysql\_main\_node\_count) | Number of mysql nodes that will be created. Required | `number` | `1` | no |
@@ -72,6 +74,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_database_firewall_id"></a> [database\_firewall\_id](#output\_database\_firewall\_id) | A unique identifier for the firewall |
 | <a name="output_mysql_main_default_database"></a> [mysql\_main\_default\_database](#output\_mysql\_main\_default\_database) | Name of the cluster's default database. |
 | <a name="output_mysql_main_default_user"></a> [mysql\_main\_default\_user](#output\_mysql\_main\_default\_user) | Username for the cluster's default user. |
 | <a name="output_mysql_main_default_user_password"></a> [mysql\_main\_default\_user\_password](#output\_mysql\_main\_default\_user\_password) | Password for the cluster's default user. |

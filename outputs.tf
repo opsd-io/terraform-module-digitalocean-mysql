@@ -47,3 +47,7 @@ output "mysql_main_default_user_password" {
   value       = digitalocean_database_cluster.mysql_main.password
   sensitive   = true
 }
+output "database_firewall_id" {
+  value       = digitalocean_database_firewall.firewall[*].id
+  description = "A unique identifier for the firewall"
+}
