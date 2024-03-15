@@ -1,15 +1,13 @@
-# output "variable" {
-#   description = "output variable description"
-#   value       = variable.main.name
-# }
 output "mysql_main_host_id" {
   description = "The ID of the database cluster."
   value       = digitalocean_database_cluster.mysql_main.id
 }
+
 output "mysql_main_host" {
   description = "Database cluster's hostname."
   value       = digitalocean_database_cluster.mysql_main.host
 }
+
 output "mysql_main_private_host" {
   description = "Same as host, but only accessible from resources within the account and in the same region."
   value       = digitalocean_database_cluster.mysql_main.private_host
@@ -52,6 +50,7 @@ output "database_firewall_id" {
   value       = [for id in var.firewall_rules : digitalocean_database_firewall.firewall[id].id]
   description = "A unique identifier for the firewall"
 }
+
 output "database_users_id" {
   description = "A unique identifier for database users"
   value       = [for id in var.database_users : digitalocean_database_user.user[id].id]
