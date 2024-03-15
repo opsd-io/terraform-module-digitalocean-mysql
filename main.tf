@@ -16,9 +16,15 @@ resource "digitalocean_database_firewall" "firewall" {
     type  = "ip_addr"
     value = each.key
   }
-
   # depends_on = [digitalocean_database_cluster.mysql_main]
 }
+
+resource "digitalocean_database_user" "user" {
+  for_each   = var.database_users
+  cluster_id = digitalocean_database_cluster.mysql_main.id
+  name       = each.key
+}
+
 resource "digitalocean_database_cluster" "mysql_main" {
   name       = var.databasename
   engine     = var.engine
