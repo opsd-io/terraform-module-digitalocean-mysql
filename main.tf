@@ -10,9 +10,13 @@ resource "digitalocean_database_mysql_config" "mysql_main" {
 resource "digitalocean_database_firewall" "firewall" {
   for_each   = var.firewall_rules
   cluster_id = digitalocean_database_cluster.mysql_main.id
-  rule {
-    type  = "ip_addr"
-    value = each.key
+
+  dynamic "rule" {
+    for_each = var.firewall_rules
+    content {
+      type  = "ip_addr"
+      value = rule.value
+    }
   }
 }
 #---------------------------------------------#
