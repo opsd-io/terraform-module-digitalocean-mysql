@@ -8,7 +8,6 @@ resource "digitalocean_database_mysql_config" "mysql_main" {
 #Description : adding database firewall rules.
 #---------------------------------------------#
 resource "digitalocean_database_firewall" "firewall" {
-  for_each   = var.firewall_rules
   cluster_id = digitalocean_database_cluster.mysql_main.id
 
   dynamic "rule" {
