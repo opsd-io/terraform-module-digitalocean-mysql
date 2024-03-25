@@ -1,14 +1,10 @@
-resource "digitalocean_database_mysql_config" "mysql_main" {
-  cluster_id        = digitalocean_database_cluster.mysql_main.id
+resource "digitalocean_database_mysql_config" "main" {
+  cluster_id        = digitalocean_database_cluster.main.id
   connect_timeout   = 10
   default_time_zone = "UTC"
 }
-
-#---------------------------------------------#
-#Description : adding database firewall rules.
-#---------------------------------------------#
-resource "digitalocean_database_firewall" "firewall" {
-  cluster_id = digitalocean_database_cluster.mysql_main.id
+resource "digitalocean_database_firewall" "main" {
+  cluster_id = digitalocean_database_cluster.main.id
 
   dynamic "rule" {
     for_each = var.firewall_rules
@@ -18,23 +14,17 @@ resource "digitalocean_database_firewall" "firewall" {
     }
   }
 }
-#---------------------------------------------#
-#Description : adding users to database.
-#---------------------------------------------#
-resource "digitalocean_database_user" "user" {
+resource "digitalocean_database_user" "main" {
   for_each   = var.database_users
-  cluster_id = digitalocean_database_cluster.mysql_main.id
+  cluster_id = digitalocean_database_cluster.main.id
   name       = each.key
 }
-#---------------------------------------------#
-#Description : creating main database.
-#---------------------------------------------#
-resource "digitalocean_database_cluster" "mysql_main" {
-  name       = var.databasename
-  engine     = var.engine
-  version    = var.version_of_engine
-  size       = var.mysql_main_size
+resource "digitalocean_database_cluster" "main" {
+  name       = var.cluster_name
+  engine     = "mysql"
+  version    = var.mysql_version
+  size       = var.node_size
   region     = var.region
-  node_count = var.mysql_main_node_count
+  node_count = var.node_count
   tags       = var.common_tags
 }

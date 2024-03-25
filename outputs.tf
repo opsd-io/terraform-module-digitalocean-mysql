@@ -1,58 +1,58 @@
-output "mysql_main_host_id" {
+output "main_host_id" {
   description = "The ID of the database cluster."
-  value       = digitalocean_database_cluster.mysql_main.id
+  value       = digitalocean_database_cluster.main.id
 }
 
-output "mysql_main_host" {
+output "main_host" {
   description = "Database cluster's hostname."
-  value       = digitalocean_database_cluster.mysql_main.host
+  value       = digitalocean_database_cluster.main.host
 }
 
-output "mysql_main_private_host" {
+output "main_private_host" {
   description = "Same as host, but only accessible from resources within the account and in the same region."
-  value       = digitalocean_database_cluster.mysql_main.private_host
+  value       = digitalocean_database_cluster.main.private_host
 }
 
-output "mysql_main_port" {
+output "main_port" {
   description = "Network port that the database cluster is listening on."
-  value       = digitalocean_database_cluster.mysql_main.port
+  value       = digitalocean_database_cluster.main.port
 }
 
-output "mysql_main_uri" {
+output "main_uri" {
   description = "The full URI for connecting to the database cluster."
-  value       = digitalocean_database_cluster.mysql_main.uri
+  value       = digitalocean_database_cluster.main.uri
   sensitive   = true
 }
 
-output "mysql_main_private_uri" {
+output "main_private_uri" {
   description = "Same as uri, but only accessible from resources within the account and in the same region."
-  value       = digitalocean_database_cluster.mysql_main.private_uri
+  value       = digitalocean_database_cluster.main.private_uri
   sensitive   = true
 }
 
-output "mysql_main_default_database" {
+output "main_default_database" {
   description = "Name of the cluster's default database."
-  value       = digitalocean_database_cluster.mysql_main.database
+  value       = digitalocean_database_cluster.main.database
 }
 
-output "mysql_main_default_user" {
+output "main_default_user" {
   description = "Username for the cluster's default user."
-  value       = digitalocean_database_cluster.mysql_main.user
+  value       = digitalocean_database_cluster.main.user
 }
 
-output "mysql_main_default_user_password" {
+output "main_default_user_password" {
   description = "Password for the cluster's default user."
-  value       = digitalocean_database_cluster.mysql_main.password
+  value       = digitalocean_database_cluster.main.password
   sensitive   = true
 }
 
-output "database_firewall_id" {
-  value       = digitalocean_database_firewall.firewall.id
+output "firewall_id" {
   description = "A unique identifier for the firewall"
+  value       = digitalocean_database_firewall.main.id
+
 }
 
-output "database_users_id" {
+output "user_ids" {
   description = "A unique identifier for database users"
-  value       = [for id in var.database_users : digitalocean_database_user.user[id].id]
-
+  value       = [for id in var.database_users : digitalocean_database_user.main[id].id]
 }

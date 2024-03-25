@@ -16,15 +16,12 @@ What does the module provide?
 
 ```hcl
 module "terraform-module-digitalocean-mysql" {
-  source  = "github.com/opsd-io/terraform-module-digitalocean-mysql/?ref=v0.0.1"
 
-  # Variables
-  databasename          = "example-mysql-cluster"
-  engine                = "mysql"
-  version_of_engine     = "8"
-  mysql_main_size       = "db-s-1vcpu-1gb"
+  cluster_name          = "example-mysql-cluster"
+  mysql_version         = "8"
+  node_size             = "db-s-1vcpu-1gb"
   region                = "nyc1"
-  mysql_main_node_count = 1
+  node_count            = 1
   common_tags           = ["production"]
   database_users        = ["Admin", "Mark", "Robert"]
   firewall_rules        = ["192.168.0.1", "192.168.0.2", "192.168.0.8"]
@@ -55,40 +52,39 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [digitalocean_database_cluster.mysql_main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_cluster) | resource |
-| [digitalocean_database_firewall.firewall](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_firewall) | resource |
-| [digitalocean_database_mysql_config.mysql_main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_mysql_config) | resource |
-| [digitalocean_database_user.user](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_user) | resource |
+| [digitalocean_database_cluster.main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_cluster) | resource |
+| [digitalocean_database_firewall.main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_firewall) | resource |
+| [digitalocean_database_mysql_config.main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_mysql_config) | resource |
+| [digitalocean_database_user.main](https://registry.terraform.io/providers/digitalocean/digitalocean/2.34.1/docs/resources/database_user) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the database cluster. | `string` | n/a | yes |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | A list of tag names to be applied to the database cluster | `set(string)` | n/a | yes |
 | <a name="input_database_users"></a> [database\_users](#input\_database\_users) | List of users | `set(string)` | `[]` | no |
-| <a name="input_databasename"></a> [databasename](#input\_databasename) | The name of the database cluster. | `string` | n/a | yes |
-| <a name="input_engine"></a> [engine](#input\_engine) | Database engine used by the cluster. | `string` | `"mysql"` | no |
 | <a name="input_firewall_rules"></a> [firewall\_rules](#input\_firewall\_rules) | List of trusted sources associated with the cluster | `set(string)` | `[]` | no |
-| <a name="input_mysql_main_node_count"></a> [mysql\_main\_node\_count](#input\_mysql\_main\_node\_count) | Number of mysql nodes that will be created. | `number` | `1` | no |
-| <a name="input_mysql_main_size"></a> [mysql\_main\_size](#input\_mysql\_main\_size) | The mysql node instance size. | `string` | `"db-s-1vcpu-1gb"` | no |
+| <a name="input_mysql_version"></a> [mysql\_version](#input\_mysql\_version) | Engine version used by the cluster. | `number` | `8` | no |
+| <a name="input_node_count"></a> [node\_count](#input\_node\_count) | Number of mysql nodes that will be created. | `number` | `1` | no |
+| <a name="input_node_size"></a> [node\_size](#input\_node\_size) | The mysql node instance size. | `string` | `"db-s-1vcpu-1gb"` | no |
 | <a name="input_region"></a> [region](#input\_region) | DigitalOcean region where the cluster will reside. | `string` | n/a | yes |
-| <a name="input_version_of_engine"></a> [version\_of\_engine](#input\_version\_of\_engine) | Engine version used by the cluster. | `number` | `8` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_database_firewall_id"></a> [database\_firewall\_id](#output\_database\_firewall\_id) | A unique identifier for the firewall |
-| <a name="output_database_users_id"></a> [database\_users\_id](#output\_database\_users\_id) | A unique identifier for database users |
-| <a name="output_mysql_main_default_database"></a> [mysql\_main\_default\_database](#output\_mysql\_main\_default\_database) | Name of the cluster's default database. |
-| <a name="output_mysql_main_default_user"></a> [mysql\_main\_default\_user](#output\_mysql\_main\_default\_user) | Username for the cluster's default user. |
-| <a name="output_mysql_main_default_user_password"></a> [mysql\_main\_default\_user\_password](#output\_mysql\_main\_default\_user\_password) | Password for the cluster's default user. |
-| <a name="output_mysql_main_host"></a> [mysql\_main\_host](#output\_mysql\_main\_host) | Database cluster's hostname. |
-| <a name="output_mysql_main_host_id"></a> [mysql\_main\_host\_id](#output\_mysql\_main\_host\_id) | The ID of the database cluster. |
-| <a name="output_mysql_main_port"></a> [mysql\_main\_port](#output\_mysql\_main\_port) | Network port that the database cluster is listening on. |
-| <a name="output_mysql_main_private_host"></a> [mysql\_main\_private\_host](#output\_mysql\_main\_private\_host) | Same as host, but only accessible from resources within the account and in the same region. |
-| <a name="output_mysql_main_private_uri"></a> [mysql\_main\_private\_uri](#output\_mysql\_main\_private\_uri) | Same as uri, but only accessible from resources within the account and in the same region. |
-| <a name="output_mysql_main_uri"></a> [mysql\_main\_uri](#output\_mysql\_main\_uri) | The full URI for connecting to the database cluster. |
+| <a name="output_firewall_id"></a> [firewall\_id](#output\_firewall\_id) | A unique identifier for the firewall |
+| <a name="output_main_default_database"></a> [main\_default\_database](#output\_main\_default\_database) | Name of the cluster's default database. |
+| <a name="output_main_default_user"></a> [main\_default\_user](#output\_main\_default\_user) | Username for the cluster's default user. |
+| <a name="output_main_default_user_password"></a> [main\_default\_user\_password](#output\_main\_default\_user\_password) | Password for the cluster's default user. |
+| <a name="output_main_host"></a> [main\_host](#output\_main\_host) | Database cluster's hostname. |
+| <a name="output_main_host_id"></a> [main\_host\_id](#output\_main\_host\_id) | The ID of the database cluster. |
+| <a name="output_main_port"></a> [main\_port](#output\_main\_port) | Network port that the database cluster is listening on. |
+| <a name="output_main_private_host"></a> [main\_private\_host](#output\_main\_private\_host) | Same as host, but only accessible from resources within the account and in the same region. |
+| <a name="output_main_private_uri"></a> [main\_private\_uri](#output\_main\_private\_uri) | Same as uri, but only accessible from resources within the account and in the same region. |
+| <a name="output_main_uri"></a> [main\_uri](#output\_main\_uri) | The full URI for connecting to the database cluster. |
+| <a name="output_user_ids"></a> [user\_ids](#output\_user\_ids) | A unique identifier for database users |
 <!-- END_TF_DOCS -->
 
 ## Examples of usage
