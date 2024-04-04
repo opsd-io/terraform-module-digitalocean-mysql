@@ -28,3 +28,26 @@ resource "digitalocean_database_cluster" "main" {
   node_count = var.node_count
   tags       = var.common_tags
 }
+
+resource "digitalocean_database_replica" "main" {
+  count                = var.replica_enable ? 1 : 0
+  //cluster_id           = join("", digitalocean_database_cluster.cluster[*].id)
+  cluster_id           = digitalocean_database_cluster.main.id
+  name                 = var.replica_cluster_name
+  size                 = var.replica_node_size
+  region               = var.replica_region
+}
+
+resource "digitalocean_database_firewall" "replica_fw" {
+  count      = var.replica_enable ? 1 : 0
+  cluster_id = digitalocean_database_cluster.main.id
+  dynamic "rule" {
+    for_each = var.replica_firewall_rules
+    content {
+      type  = "ip_addr"
+      value = rule.value
+    }
+  }
+  depends_on = [digitalocean_database_replica.main]
+}
+
