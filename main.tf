@@ -33,9 +33,9 @@ resource "digitalocean_database_replica" "main" {
   count = var.replica_enable ? 1 : 0
   #cluster_id           = join("", digitalocean_database_cluster.cluster[*].id)
   cluster_id = digitalocean_database_cluster.main.id
-  name       = try(var.replica_cluster_name, "${var.cluster_name}-replica")
+  name       = coalesce(var.replica_cluster_name, "${var.cluster_name}-replica")
   size       = var.replica_node_size
-  region     = try(var.replica_region, var.region)
+  region     = coalesce(var.replica_region, var.region)
 }
 
 resource "digitalocean_database_firewall" "replica_fw" {
