@@ -75,7 +75,7 @@ No modules.
 | <a name="input_replica_enable"></a> [replica\_enable](#input\_replica\_enable) | Flag to control the replica creation. | `bool` | `false` | no |
 | <a name="input_replica_firewall_rules"></a> [replica\_firewall\_rules](#input\_replica\_firewall\_rules) | List of trusted sources associated with the replica cluster | `set(string)` | `[]` | no |
 | <a name="input_replica_node_size"></a> [replica\_node\_size](#input\_replica\_node\_size) | The mysql replica node instance size. | `string` | `"db-s-1vcpu-1gb"` | no |
-| <a name="input_replica_region"></a> [replica\_region](#input\_replica\_region) | DigitalOcean replica region where replica will reside. | `string` | n/a | yes |
+| <a name="input_replica_region"></a> [replica\_region](#input\_replica\_region) | DigitalOcean replica region where replica will reside. | `string` | `null` | no |
 
 ## Outputs
 

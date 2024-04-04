@@ -42,7 +42,7 @@ variable "region" {
 variable "replica_region" {
   description = "DigitalOcean replica region where replica will reside."
   type        = string
-  nullable    = false
+  default     = null
 }
 
 variable "common_tags" {
