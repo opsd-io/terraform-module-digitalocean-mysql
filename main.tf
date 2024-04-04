@@ -30,12 +30,12 @@ resource "digitalocean_database_cluster" "main" {
 }
 
 resource "digitalocean_database_replica" "main" {
-  count                = var.replica_enable ? 1 : 0
-  //cluster_id           = join("", digitalocean_database_cluster.cluster[*].id)
-  cluster_id           = digitalocean_database_cluster.main.id
-  name                 = var.replica_cluster_name
-  size                 = var.replica_node_size
-  region               = var.replica_region
+  count = var.replica_enable ? 1 : 0
+  #cluster_id           = join("", digitalocean_database_cluster.cluster[*].id)
+  cluster_id = digitalocean_database_cluster.main.id
+  name       = var.replica_cluster_name
+  size       = var.replica_node_size
+  region     = var.replica_region
 }
 
 resource "digitalocean_database_firewall" "replica_fw" {
@@ -50,4 +50,3 @@ resource "digitalocean_database_firewall" "replica_fw" {
   }
   depends_on = [digitalocean_database_replica.main]
 }
-
