@@ -3,7 +3,7 @@ provider "digitalocean" {
 }
 
 module "terraform-module-digitalocean-mysql" {
-  source                 = "github.com/opsd-io/terraform-module-digitalocean-mysql?ref=3-add-spare-node-for-mysql"
+  source                 = "github.com/opsd-io/terraform-module-digitalocean-mysql"
   cluster_name           = "example-mysql-cluster"
   mysql_version          = "8"
   node_size              = "db-s-1vcpu-1gb"
