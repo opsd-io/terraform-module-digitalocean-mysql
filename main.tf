@@ -32,7 +32,7 @@ resource "digitalocean_database_replica" "main" {
   region     = coalesce(var.replica_region, var.region)
 }
 
-resource "digitalocean_database_firewall" "replica_fw" {
+resource "digitalocean_database_firewall" "replica" {
   count      = var.replica_enable ? 1 : 0
   cluster_id = digitalocean_database_cluster.main.id
   dynamic "rule" {

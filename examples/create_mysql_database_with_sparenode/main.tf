@@ -1,8 +1,4 @@
-provider "digitalocean" {
-  token = var.do_token
-}
-
-module "terraform-module-digitalocean-mysql" {
+module "mysql_with_replica" {
   source                 = "github.com/opsd-io/terraform-module-digitalocean-mysql"
   cluster_name           = "example-mysql-cluster"
   mysql_version          = "8"
