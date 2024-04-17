@@ -1,8 +1,3 @@
-resource "digitalocean_database_mysql_config" "main" {
-  cluster_id        = digitalocean_database_cluster.main.id
-  connect_timeout   = 10
-  default_time_zone = "UTC"
-}
 resource "digitalocean_database_firewall" "main" {
   cluster_id = digitalocean_database_cluster.main.id
 
@@ -27,4 +22,25 @@ resource "digitalocean_database_cluster" "main" {
   region     = var.region
   node_count = var.node_count
   tags       = var.common_tags
+}
+
+resource "digitalocean_database_replica" "main" {
+  count      = var.replica_enable ? 1 : 0
+  cluster_id = digitalocean_database_cluster.main.id
+  name       = coalesce(var.replica_cluster_name, "${var.cluster_name}-replica")
+  size       = var.replica_node_size
+  region     = coalesce(var.replica_region, var.region)
+}
+
+resource "digitalocean_database_firewall" "replica" {
+  count      = var.replica_enable ? 1 : 0
+  cluster_id = digitalocean_database_cluster.main.id
+  dynamic "rule" {
+    for_each = var.replica_firewall_rules
+    content {
+      type  = "ip_addr"
+      value = rule.value
+    }
+  }
+  depends_on = [digitalocean_database_replica.main]
 }
